@@ -1,5 +1,5 @@
 import asyncio
-from ParserUkrDate import UkrDateParser
+from parser_ukr_date import UkrDateParser
 
 
 async def main():
