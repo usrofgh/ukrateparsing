@@ -13,3 +13,8 @@ proxy = [
 ]
 
 iter_proxy = itertools.cycle(iter(proxy))
+
+
+headers = {
+
+}

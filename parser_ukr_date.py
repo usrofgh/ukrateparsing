@@ -3,12 +3,11 @@ import json
 import asyncio
 import httpx
 
-
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from httpx import Timeout
 
-from proxy import iter_proxy
+from config import iter_proxy
 
 
 class UkrDateParser:
@@ -78,15 +77,6 @@ class UkrDateParser:
 
     def __get_base_url(self) -> str:
         return self.__BASE_URL
-
-    def __parse_count_pages(self) -> None:
-        filters = "?action=search&op=s&genre=1&look_genre=2&geo_select=0&age_from=18&age_to=90"
-        n_page = "600"
-        url_n_page = urljoin(self.__BASE_URL, n_page)
-        r = httpx.get(url_n_page)  # TODO: add headers with cookies
-        page_soup = BeautifulSoup(r.content, "html.parser")
-        count_pages = int(page_soup.select(".resultPpaddingItem a")[-1]["href"].rsplit("=")[-1])
-        self.__count_pages: int = count_pages
 
     def __generate_pagination_links(self) -> None:
         self.__pagination_links = [self.__BASE_URL + f"&page={i}"
